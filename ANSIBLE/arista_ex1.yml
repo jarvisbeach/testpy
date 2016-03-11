@@ -1,0 +1,17 @@
+---
+
+- name: Arista Exercise 1
+  hosts: arista
+
+  tasks:
+    - name: add VLANs
+      eos_vlan: name={{item.vlan_name}} vlanid={{item.vlan_id}}
+            username={{eapi_username}}
+            password={{eapi_password}}
+            host={{eapi_hostname}}
+            port={{eapi_port}}
+            transport=https
+      with_items:
+        - {vlan_name: red, vlan_id: 110}
+        - {vlan_name: blue, vlan_id: 111}
+        - {vlan_name: green, vlan_id: 112}

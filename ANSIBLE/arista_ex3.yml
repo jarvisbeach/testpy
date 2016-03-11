@@ -1,0 +1,21 @@
+---
+
+- name: Arista Exercise 1
+  hosts: arista
+
+  tasks:
+    - name: Set interface ethernet 6 description
+      eos_interface: name=Ethernet6 description="*** IN USE ***"
+            username={{eapi_username}}
+            password={{eapi_password}}
+            host={{eapi_hostname}}
+            port={{eapi_port}}
+            transport=https
+    
+    - name: Set interface ethernet 6 to trunk
+      eos_switchport: name=Ethernet6 mode=trunk trunk_native_vlan=1 trunk_allowed_vlans=110,111,112
+            username={{eapi_username}}
+            password={{eapi_password}}
+            host={{eapi_hostname}}
+            port={{eapi_port}}
+            transport=https 
